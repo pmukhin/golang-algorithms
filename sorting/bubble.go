@@ -2,7 +2,7 @@ package sorting
 
 // Bubble sorts an input array
 // with bubble sort algorithm.
-// This algorithms has constant
+// This algorithm has constant
 // complexity - O(n*n)
 func Bubble(input []int) []int {
 	length := len(input)
