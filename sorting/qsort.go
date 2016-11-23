@@ -9,7 +9,7 @@ func QSort(input []int) []int {
 	// We will use a tail call here
 	// so we need a point to stop
 	if length <= 1 {
-	return input
+		return input
 	}
 	// First let's find a pivot element
 	pivot := input[rand.Intn(length - 1)]
