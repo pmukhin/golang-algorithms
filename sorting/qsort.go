@@ -1,5 +1,7 @@
 package sorting
 
+import "math/rand"
+
 // QSort sorts an input array
 // Best time for this algorithm is O(n log n)
 func QSort(input []int) []int {
@@ -10,7 +12,7 @@ func QSort(input []int) []int {
 	return input
 	}
 	// First let's find a pivot element
-	pivot := input[length - 1]
+	pivot := input[rand.Intn(length - 1)]
 
 	// Now let's create 3 arrays with input array length
 	left := make([]int, 0, length)
