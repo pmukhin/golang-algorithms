@@ -6,55 +6,67 @@ type SinglyLinkedList struct {
 }
 
 type SinglyLinkedNode struct {
-	Next *SinglyLinkedNode
+	Next  *SinglyLinkedNode
 	Value interface{}
 }
 
 func (l *SinglyLinkedList) Append(value interface{}) {
-	if l.First == nil {
-		l.First = &SinglyLinkedNode{Value:value}
+	newNode := &SinglyLinkedNode{Value: value}
+
+	if l.Length == 0 {
+		l.First = newNode
 		l.Length++
 		return
 	}
+
 	firstCopy := l.First
+
 	for {
 		if firstCopy.Next == nil {
 			break
 		}
 		firstCopy = firstCopy.Next
 	}
-	firstCopy.Next = &SinglyLinkedNode{Value:value}
+	firstCopy.Next = newNode
 	l.Length++
 }
 
 func (l *SinglyLinkedList) Reverse() {
-	// Check that we can manipulate pointers
-	if l.Length <= 1 || l.First == nil || l.First.Next == nil {
+	// First let's check length. If it's
+	// less or equals to 1, there's nothing
+	// to reverse, actually...
+	if l.Length <= 1 {
 		return
 	}
-	// Now we create a copy of our current top node
-	curr := l.First
+	// Now will need three pointers
+	// One for a copy of l.First
+	// One for a temporary copy of every next node
+	// And one for storing every previos copy (which
+	// is going to be nil in first iteration)
 	var (
-		// Let's create a nil pointer for our new top node
-		newFirst *SinglyLinkedNode = nil
-		// Let's create a nil pointer for storing every next pointer
-		temp *SinglyLinkedNode = nil
+		current *SinglyLinkedNode = l.First
+		temp    *SinglyLinkedNode = nil
+		prev    *SinglyLinkedNode = nil
 	)
-
 	for {
-		// if current is nil then break
-		if curr == nil {
+		// If current element is nil,
+		// The list is reversed
+		if current == nil {
 			break
 		}
-		// Let's store next value in temporary pointer
-		temp = curr.Next
-		// Next is now newFirst (in first iteration it's nil)
-		curr.Next = newFirst
-		// newFirst is now the current node
-		newFirst = curr
-		// curr becomes 'the current next'
-		curr = temp
+		// Copy next pointer to temporary
+		// Because we're going to lose it otherwise
+		temp = current.Next
+		// Now current.next is previos (which is nil
+		// In 1st iteration
+		current.Next = prev
+		// Now prev is current element, in next iteration
+		// It's not nil anymore
+		prev = current
+		// Current is not temp, which is a copy of current.Next
+		current = temp
 	}
 
-	l.First = newFirst
+	// Now the top of tree is the previous one (which is not nil)
+	l.First = prev
 }
