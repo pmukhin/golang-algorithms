@@ -4,6 +4,7 @@ package numeric
 // gcd(6, 12) -> (12, 6) -> (6, 0) -> 6
 // gcd(3, 4) -> (4, 3) -> (3, 1) -> (1, 0) -> 1
 // gcd(2, 4) -> (4, 2) -> (2, 0) -> 2
+// gcd(17, 19) -> (19, 17) -> (17, 2) -> (2, 1) -> (1, 0) -> 1
 
 // GreatestCommonDivisor finds Greatest Common Divisor
 // of two numbers a and b
